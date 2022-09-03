@@ -1,10 +1,29 @@
-# About this Repo
+## Nginx Dockerfile
 
-This is the Git repo of the official Docker image for [nginx](https://registry.hub.docker.com/_/nginx/). See the
-Hub page for the full readme on how to use the Docker image and for information
-regarding contributing and issues.
 
-The full readme is generated over in [docker-library/docs](https://github.com/docker-library/docs),
-specifically in [docker-library/docs/nginx](https://github.com/docker-library/docs/tree/master/nginx).
+This repository contains **Dockerfile** of [Nginx](http://nginx.org/) for [Docker](https://www.docker.com/)'s [automated build](https://registry.hub.docker.com/u/dockerfile/nginx/) published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
 
-The changelog for NGINX releases is available at [nginx.org changes page](https://nginx.org/en/CHANGES).
+
+### Base Docker Image
+
+* [dockerfile/ubuntu](http://dockerfile.github.io/#/ubuntu)
+
+
+### Installation
+
+1. Install [Docker](https://www.docker.com/).
+
+2. Download [automated build](https://registry.hub.docker.com/u/dockerfile/nginx/) from public [Docker Hub Registry](https://registry.hub.docker.com/): `docker pull dockerfile/nginx`
+
+   (alternatively, you can build an image from Dockerfile: `docker build -t="dockerfile/nginx" github.com/dockerfile/nginx`)
+
+
+### Usage
+
+    docker run -d -p 80:80 dockerfile/nginx
+
+#### Attach persistent/shared directories
+
+    docker run -d -p 80:80 -v <sites-enabled-dir>:/etc/nginx/conf.d -v <certs-dir>:/etc/nginx/certs -v <log-dir>:/var/log/nginx -v <html-dir>:/var/www/html dockerfile/nginx
+
+After few seconds, open `http://<host>` to see the welcome page.
